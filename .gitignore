@@ -1,0 +1,23 @@
+# Claude Code / Tooling (nicht ins Repo)
+.claude/
+.agents/
+skills-lock.json
+
+# Abhängigkeiten
+node_modules/
+
+# Betriebssystem
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs & Temp
+*.log
+*.tmp
+
+# Editor
+.vscode/
+.idea/
+
+# Vercel
+.vercel/
