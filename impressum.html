@@ -1,30 +1,286 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impressum</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impressum | VoltWeb</title>
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#29271f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 8 96 88H4Z' fill='%23F0CB0E' stroke='%23161611' stroke-width='7' stroke-linejoin='round'/%3E%3Cpath d='M56 34 40 60h9l-7 24 22-32h-11z' fill='%23161611'/%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/atkinson-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'self'; object-src 'none'">
+<style>
+@font-face{
+  font-family:'Archivo';
+  font-style:normal; font-weight:100 900; font-stretch:62% 125%; font-display:swap;
+  src:url('assets/fonts/archivo-var-latin.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Atkinson Hyperlegible';
+  font-style:normal; font-weight:400; font-display:swap;
+  src:url('assets/fonts/atkinson-400-latin.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Atkinson Hyperlegible';
+  font-style:normal; font-weight:700; font-display:swap;
+  src:url('assets/fonts/atkinson-700-latin.woff2') format('woff2');
+}
 
+:root{
+  --bg:            oklch(0.205 0.012 96);
+  --surface:       oklch(0.245 0.012 96);
+  --line:          oklch(0.365 0.012 96);
+  --line-soft:     oklch(0.305 0.011 96);
+  --ink:           oklch(0.965 0.005 96);
+  --muted:         oklch(0.75 0.014 96);
+  --volt:          oklch(0.88 0.175 96);
+  --volt-hot:      oklch(0.91 0.165 97);
+  --volt-deep:     oklch(0.86 0.165 95);
+  --ink-on-volt:   oklch(0.17 0.02 96);
+  --night:         oklch(0.15 0.009 96);
+  --night-deep:    oklch(0.125 0.008 96);
+  --night-line:    oklch(0.28 0.01 96);
+  --night-muted:   oklch(0.75 0.012 96);
+  --shadow-s: 0 1px 2px oklch(0 0 0 / .2), 0 4px 14px -4px oklch(0 0 0 / .3);
+  --shadow-m: 0 1px 2px oklch(0 0 0 / .2), 0 16px 38px -14px oklch(0 0 0 / .45);
+  --font-display: "Archivo", "Arial Black", sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9375rem;
+  --wrap: 1160px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --ease-out: cubic-bezier(.23,1,.32,1);
+  color-scheme: dark;
+}
+
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:var(--fs-body);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{ display:block; max-width:100%; }
+a{ color:inherit; }
+::selection{ background:var(--volt); color:var(--ink-on-volt); }
+:focus-visible{ outline:3px solid var(--volt-deep); outline-offset:3px; border-radius:2px; }
+
+h1,h2{
+  font-family:var(--font-display);
+  font-stretch:118%; font-weight:850;
+  line-height:1.04; letter-spacing:-0.015em;
+  text-wrap:balance; overflow-wrap:break-word;
+}
+p{ max-width:68ch; text-wrap:pretty; }
+.wrap{ max-width:var(--wrap); margin-inline:auto; padding-inline:var(--gutter); }
+
+.skip-link{
+  position:fixed; top:10px; left:10px; z-index:200;
+  background:var(--volt); color:var(--ink-on-volt);
+  font-weight:700; text-decoration:none;
+  padding:10px 16px; border-radius:6px;
+  transform:translateY(-200%);
+}
+.skip-link:focus{ transform:none; }
+
+/* Navigation – wie Startseite */
+.nav{
+  position:fixed; inset:0 0 auto 0; z-index:100;
+  background:oklch(0.205 0.012 96 / 0.88);
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line-soft);
+  box-shadow:0 6px 24px -14px oklch(0 0 0/.5);
+}
+.nav-inner{ display:flex; align-items:center; gap:1.5rem; height:68px; }
+.brand{
+  display:flex; align-items:center; gap:.6rem;
+  font-family:var(--font-display); font-stretch:118%; font-weight:850;
+  font-size:1.3rem; text-decoration:none; letter-spacing:-0.01em;
+  margin-right:auto;
+  padding-block:6px;
+}
+.brand svg{ width:30px; height:30px; flex:none; }
+.nav-links{ display:none; gap:1.7rem; list-style:none; }
+.nav-links a{
+  text-decoration:none; color:var(--muted); font-weight:700; font-size:.9688rem;
+  transition:color .2s;
+  padding:8px 2px;
+}
+.nav-links a:hover{ color:var(--ink); }
+.nav .btn{ font-size:.9375rem; padding:.7em 1.2em; min-height:44px; white-space:nowrap; }
+.cta-x{ display:none; }
+.nav-inner > nav{ display:none; }
+@media (min-width: 560px){ .cta-x{ display:inline; } }
+@media (min-width: 800px){ .nav-inner > nav{ display:block; } .nav-links{ display:flex; } }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.55em;
+  font-family:var(--font-display); font-stretch:108%; font-weight:720;
+  font-size:1.0625rem; text-decoration:none; cursor:pointer;
+  padding:0.95em 1.7em; border-radius:9px; border:0;
+  min-height:52px;
+  transition:transform .2s var(--ease-out), box-shadow .3s var(--ease-out), background .25s;
+  touch-action:manipulation;
+}
+.btn:active{ transform:scale(.97); }
+.btn svg{ width:19px; height:19px; flex:none; }
+.btn-volt{ background:var(--volt); color:var(--ink-on-volt); box-shadow:var(--shadow-s); }
+.btn-volt:hover{ background:var(--volt-hot); transform:translateY(-1px); box-shadow:var(--shadow-m); }
+
+/* Rechtstext-Layout */
+.legal{ padding:calc(68px + clamp(3rem, 7vw, 5.5rem)) 0 clamp(4rem, 8vw, 6.5rem); }
+.legal h1{ font-size:clamp(2.1rem, 1.4rem + 3vw, 3.2rem); margin-bottom:.6rem; }
+.legal .lead{ color:var(--muted); font-size:1.125rem; margin-bottom:clamp(2.2rem, 5vw, 3.2rem); max-width:56ch; }
+.legal h2{
+  font-size:clamp(1.25rem, 1.05rem + 0.9vw, 1.55rem);
+  font-stretch:108%; font-weight:760; letter-spacing:-0.008em;
+  margin:2.6rem 0 .8rem;
+}
+.legal h2:first-of-type{ margin-top:0; }
+.legal p, .legal address{ color:var(--muted); margin-bottom:.9rem; font-style:normal; }
+.legal a{ color:var(--volt); text-decoration:underline; text-underline-offset:3px; }
+.legal .card{
+  background:var(--surface);
+  border:1px solid var(--line-soft);
+  border-radius:12px;
+  padding:clamp(1.3rem, 3vw, 1.8rem);
+  margin-bottom:1.2rem;
+  max-width:640px;
+}
+.legal .card p{ margin-bottom:0; }
+.hinweis{
+  display:inline-flex; align-items:center; gap:.45em;
+  background:var(--volt); color:var(--ink-on-volt);
+  font-family:var(--font-display); font-stretch:106%; font-weight:720;
+  font-size:0.78rem; letter-spacing:0.05em;
+  padding:4px 11px; border-radius:5px;
+  text-transform:uppercase;
+  margin-bottom:1.1rem;
+}
+
+/* Footer – wie Startseite */
+footer{
+  background:var(--night-deep);
+  color:oklch(0.965 0 0);
+  border-top:1px solid var(--night-line);
+  padding:clamp(3rem, 6vw, 4.5rem) 0 2rem;
+  font-size:var(--fs-small);
+}
+.footer-grid{ display:grid; gap:2.5rem; margin-bottom:3rem; }
+@media (min-width: 780px){ .footer-grid{ grid-template-columns:1.6fr 1fr 1fr; } }
+.footer-brand p{ color:var(--night-muted); margin-top:1rem; max-width:38ch; }
+.footer-col h4{
+  font-family:var(--font-display); font-stretch:114%; font-weight:800;
+  font-size:.9375rem; margin-bottom:1rem;
+}
+.footer-col ul{ list-style:none; display:grid; gap:.6rem; }
+.footer-col a{ color:var(--night-muted); text-decoration:none; transition:color .2s; padding-block:8px; display:inline-block; }
+.footer-col a:hover{ color:var(--volt); }
+.footer-bottom{
+  border-top:1px solid var(--night-line);
+  padding-top:1.6rem;
+  display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between;
+  color:var(--night-muted); font-size:.8438rem;
+}
+</style>
+</head>
 <body>
 
-<main>
-    <h1>Impressum</h1>
+<a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
 
-    <p>
-        Max Mustermann<br>
-        Musterstraße 1<br>
-        12345 Musterstadt
-    </p>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html" aria-label="VoltWeb – zur Startseite">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8 96 88H4Z" fill="oklch(0.88 0.175 96)" stroke="oklch(0.19 0.012 96)" stroke-width="7" stroke-linejoin="round"/><path d="M56 34 40 60h9l-7 24 22-32h-11z" fill="oklch(0.19 0.012 96)"/></svg>
+      VoltWeb
+    </a>
+    <nav aria-label="Hauptnavigation">
+      <ul class="nav-links">
+        <li><a href="index.html#leistungen">Leistungen</a></li>
+        <li><a href="index.html#ablauf">Ablauf</a></li>
+        <li><a href="index.html#stimmen">Stimmen</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-volt" href="index.html#kontakt"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>Erstgespräch<span class="cta-x">&nbsp;buchen</span></a>
+  </div>
+</header>
 
-    <h2>Kontakt</h2>
+<main id="inhalt">
+  <section class="legal">
+    <div class="wrap">
+      <p class="hinweis">Platzhalter – vor Livegang befüllen</p>
+      <h1>Impressum</h1>
+      <p class="lead">Angaben gemäß § 5 DDG. Alle Inhalte auf dieser Seite sind Platzhalter und müssen vor dem Livegang durch echte Daten ersetzt werden.</p>
 
-    <p>
-        E-Mail: kontakt@deine-domain.de
-    </p>
+      <h2>Anbieter</h2>
+      <div class="card">
+        <address>
+          Max Mustermann<br>
+          VoltWeb – Musterfirma<br>
+          Musterstraße 1<br>
+          12345 Musterstadt<br>
+          Deutschland
+        </address>
+      </div>
 
+      <h2>Kontakt</h2>
+      <p>
+        Telefon: <a href="tel:+498000000000">0800 000 00 00</a><br>
+        E-Mail: <a href="mailto:hallo@voltweb.de">hallo@voltweb.de</a>
+      </p>
+
+      <h2>Umsatzsteuer-ID</h2>
+      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:<br>DE&nbsp;000&nbsp;000&nbsp;000 (Platzhalter)</p>
+
+      <h2>Verantwortlich für den Inhalt</h2>
+      <p>Max Mustermann, Anschrift wie oben.</p>
+
+      <h2>Streitschlichtung</h2>
+      <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. (Platzhalter – bitte rechtlich prüfen lassen.)</p>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8 96 88H4Z" fill="oklch(0.88 0.175 96)" stroke="oklch(0.12 0.006 96)" stroke-width="7" stroke-linejoin="round"/><path d="M56 34 40 60h9l-7 24 22-32h-11z" fill="oklch(0.12 0.006 96)"/></svg>
+          VoltWeb
+        </a>
+        <p>Die Webagentur für Elektriker, Elektrotechniker und Elektrofachbetriebe. Websites zum Festpreis – fertig in 3 Tagen.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Inhalt</h4>
+        <ul>
+          <li><a href="index.html#leistungen">Leistungen</a></li>
+          <li><a href="index.html#ablauf">Ablauf</a></li>
+          <li><a href="index.html#stimmen">Stimmen</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt &amp; Rechtliches</h4>
+        <ul>
+          <li><a href="tel:+498000000000">0800 000 00 00</a></li>
+          <li><a href="mailto:hallo@voltweb.de">hallo@voltweb.de</a></li>
+          <li><a href="impressum.html">Impressum</a>
+          <li><a href="datenschutz.html">Datenschutz</a>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VoltWeb. Alle Rechte vorbehalten.</span>
+      <span>Gemacht für Betriebe, die anpacken.</span>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
