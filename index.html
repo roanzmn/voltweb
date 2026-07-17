@@ -837,6 +837,7 @@ section{ scroll-margin-top:92px; }
   box-shadow:0 0 0 3px var(--volt-dim);
 }
 .lead-form .btn{ width:100%; margin-top:.4rem; }
+.form-error{ margin-top:.9rem; font-size:.875rem; font-weight:700; color:oklch(0.5 0.19 25); text-align:center; }
 .form-privacy{ margin-top:.9rem; font-size:.875rem; color:oklch(0.45 0.012 96); text-align:center; }
 .form-privacy a{ display:inline-block; padding-block:6px; margin-block:-6px; }
 .form-success{ text-align:center; padding:2.5rem 1rem; }
@@ -1414,6 +1415,7 @@ footer{
             Erstgespräch anfragen
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
+          <p class="form-error" id="form-error" hidden role="alert">Senden fehlgeschlagen. Bitte versuchen Sie es erneut – oder rufen Sie uns direkt an.</p>
           <p class="form-privacy">Ihre Daten nutzen wir nur für den Rückruf. <a href="#" style="color:inherit">Datenschutz</a></p>
         </form>
         <div class="lead-form form-success" id="form-success" hidden tabindex="-1" role="status">
@@ -1586,16 +1588,43 @@ footer{
     impWake();
   }
 
-  /* Formular (Demo: kein Versand hinterlegt) */
+  /* Formular → Supabase (Tabelle "leads", RLS: anon darf nur einfügen) */
   var form = document.getElementById("lead-form");
   var success = document.getElementById("form-success");
   if (form && success){
+    var SUPABASE_URL = "https://exwipkjfgmdsnkkesqsn.supabase.co";
+    var SUPABASE_KEY = "sb_publishable_-ekZa21T-O9FaUv-hsD6zg_6PChEacV";
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var formError = document.getElementById("form-error");
     form.addEventListener("submit", function(e){
       e.preventDefault();
       if (!form.reportValidity()) return;
-      form.hidden = true;
-      success.hidden = false;
-      success.focus();
+      submitBtn.disabled = true;
+      submitBtn.setAttribute("aria-busy", "true");
+      if (formError) formError.hidden = true;
+      fetch(SUPABASE_URL + "/rest/v1/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY,
+          "Prefer": "return=minimal"
+        },
+        body: JSON.stringify({
+          name: form.name.value.trim(),
+          tel: form.tel.value.trim(),
+          firma: form.firma.value.trim() || null
+        })
+      }).then(function(res){
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        form.hidden = true;
+        success.hidden = false;
+        success.focus();
+      }).catch(function(){
+        if (formError) formError.hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.removeAttribute("aria-busy");
+      });
     });
   }
 
