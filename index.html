@@ -1408,6 +1408,10 @@ footer{
             <input id="f-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required placeholder="z. B. 0171 2345678">
           </div>
           <div class="field">
+            <label for="f-email">E-Mail-Adresse</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="z. B. info@elektro-krueger.de">
+          </div>
+          <div class="field">
             <label for="f-firma">Firma <small>(optional)</small></label>
             <input id="f-firma" name="firma" type="text" autocomplete="organization" placeholder="z. B. Elektro Krüger GmbH">
           </div>
@@ -1613,6 +1617,7 @@ footer{
         body: JSON.stringify({
           name: form.name.value.trim(),
           tel: form.tel.value.trim(),
+          email: form.email.value.trim(),
           firma: form.firma.value.trim() || null
         })
       }).then(function(res){
