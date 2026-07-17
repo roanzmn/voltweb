@@ -919,7 +919,7 @@ footer{
       <ul class="nav-links">
         <li><a href="#leistungen">Leistungen</a></li>
         <li><a href="#ablauf">Ablauf</a></li>
-        <li><a href="#stimmen">Stimmen</a></li>
+        <!-- Stimmen deaktiviert: <li><a href="#stimmen">Stimmen</a></li> -->
         <li><a href="#faq">FAQ</a></li>
       </ul>
     </nav>
@@ -1131,6 +1131,8 @@ footer{
   </section>
 
   <!-- ============================== STIMMEN ============================== -->
+  <!-- STIMMEN-SEKTION vorübergehend deaktiviert.
+       Zum Reaktivieren: diese Zeile und die Zeile "ENDE STIMMEN-SEKTION" am Sektionsende entfernen.
   <section class="voices" id="stimmen">
     <div class="wrap">
       <div class="sect-head center" data-reveal>
@@ -1286,6 +1288,7 @@ footer{
       </div>
     </div>
   </section>
+  ENDE STIMMEN-SEKTION -->
 
 
   <!-- ============================== ZAHLEN ============================== -->
@@ -1448,7 +1451,7 @@ footer{
         <ul>
           <li><a href="#leistungen">Leistungen</a></li>
           <li><a href="#ablauf">Ablauf</a></li>
-          <li><a href="#stimmen">Stimmen</a></li>
+          <!-- Stimmen deaktiviert: <li><a href="#stimmen">Stimmen</a></li> -->
           <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
@@ -1690,8 +1693,8 @@ footer{
     };
 
     window.addEventListener("mousemove", function(e){
-      // Keine Funken über dem cleanen Hero (solange er das Bild füllt)
-      if (window.scrollY < window.innerHeight * 0.85){ last = { x: e.clientX, y: e.clientY }; return; }
+      /* Selbstheilung: falls der Canvas ohne Viewport-Größe initialisiert wurde */
+      if (fx.width !== Math.round(window.innerWidth * dpr)) sizeFx();
       if (last){
         var dx = e.clientX - last.x, dy = e.clientY - last.y;
         var dist = Math.hypot(dx, dy);
